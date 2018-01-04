@@ -1,0 +1,27 @@
+{
+  "name": "react-native-setdevteam",
+  "version": "1.0.0",
+  "description": "React native plugin to set development team for xcode projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhdeck/react-native-setdevteam.git"
+  },
+  "author": "Ray Deck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhdeck/react-native-setdevteam/issues"
+  },
+  "homepage": "https://github.com/rhdeck/react-native-setdevteam#readme",
+  "rnpm": {
+    "plugin": "plugin.js"
+  },
+  "dependencies": {
+    "glob": "^7.1.2",
+    "xcode": "apache/cordova-node-xcode",
+    "xcode-devteam-management": "^1.0.0"
+  }
+}
