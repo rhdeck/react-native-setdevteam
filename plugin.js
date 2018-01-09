@@ -15,10 +15,16 @@ module.exports = [
         return;
       }
       //Go interactive
-      dvm.getFromDevTeams().then(devteam => {
+      dt = dvm.getDevTeam();
+      if (dt) {
         updateProjects(devteam);
         console.log("Updated with development team", devteam);
-      });
+      } else {
+        dvm.getFromDevTeams().then(devteam => {
+          updateProjects(devteam);
+          console.log("Updated with development team", devteam);
+        });
+      }
     }
   }
 ];
