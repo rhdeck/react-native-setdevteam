@@ -1,8 +1,8 @@
 {
   "name": "react-native-setdevteam",
   "version": "1.1.1",
-  "description": "React native plugin to set development team for xcode projects",
-  "main": "index.js",
+  "description":
+    "React native plugin to set development team for xcode projects",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "xcode": "apache/cordova-node-xcode",
+    "xcode": "rhdeck/cordova-node-xcode",
     "xcode-devteam-management": "^1.0.0"
   }
 }
