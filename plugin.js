@@ -8,22 +8,53 @@ module.exports = [
   {
     name: "setdevteam [devteamid]",
     description: "Set Development team for XCode project",
-    func: (argv, config, args) => {
+    options: [
+      {
+        flags: "-i --interactive",
+        description: "Force interactive devteam selection"
+      }
+    ],
+    func: async (argv, config, args) => {
+      const { xcodeDevTeam } = require("./package.json");
       if (argv && argv[0]) {
         updateProjects(argv[0]);
-        console.log("Updated with development team", argv[0]);
+        console.log("Updated with specified development team", argv[0]);
         return;
       }
       //Go interactive
-      const dt = dvm.getDevTeam();
-      if (dt) {
-        updateProjects(dt);
-        console.log("Updated with development team", dt);
-      } else {
+      if (args.interactive) {
         dvm.getFromDevTeams().then(devteam => {
           updateProjects(devteam);
-          console.log("Updated with development team", devteam);
+          savePackage(devteam);
+          console.log("Updated with selected development team", devteam);
         });
+      } else if (xcodeDevTeam) {
+        updateProjects(xcodeDevTeam);
+        savePackage(xcodeDevTeam);
+        console.log(
+          "Updated projects with previously-selected development team",
+          xcodeDevTeam
+        );
+      } else {
+        const dt = dvm.getDevTeam();
+        if (dt) {
+          updateProjects(dt);
+          savePackage(dt);
+          console.log("Updated with user-wide development team", dt);
+        } else {
+          try {
+            const devteam = await dvm.getFromDevTeams();
+            if (devteam) {
+              updateProjects(devteam);
+              savePackage(devteam);
+              console.log("Updated with selected development team", devteam);
+            } else {
+              console.log("No dev team selected. Aborting");
+            }
+          } catch (e) {
+            console.log("Error while selecting development team. Aborting");
+          }
+        }
       }
     }
   }
@@ -52,4 +83,10 @@ function updateProjects(devteam) {
       p.writeSync();
     });
   }
+}
+function savePackage(xcodeDevTeam) {
+  const fp = "./package.json";
+  const project = require(fp);
+  const out = { ...project, xcodeDevTeam };
+  fs.writeFileSync(fp, JSON.stringify(out, null, 2));
 }
