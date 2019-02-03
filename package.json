@@ -16,7 +16,13 @@
   },
   "homepage": "https://github.com/rhdeck/react-native-setdevteam#readme",
   "rnpm": {
-    "plugin": "plugin.js"
+    "plugin": "plugin.js",
+    "commands": {
+      "postlink": "node ./node_modules/.bin/react-native-setdevteam"
+    }
+  },
+  "bin": {
+    "react-native-setdevteam": "postlink.js"
   },
   "dependencies": {
     "glob": "^7.1.2",
