@@ -10,12 +10,15 @@ module.exports = [
     description: "Set Development team for XCode project",
     options: [
       {
-        flags: "-i --interactive",
+        command: "-i --interactive",
         description: "Force interactive devteam selection"
       }
     ],
     func: async (argv, config, args) => {
-      const { xcodeDevTeam } = require("./package.json");
+      const { xcodeDevTeam } = require(path.join(
+        process.cwd(),
+        "package.json"
+      ));
       if (argv && argv[0]) {
         updateProjects(argv[0]);
         console.log("Updated with specified development team", argv[0]);
@@ -85,7 +88,7 @@ function updateProjects(devteam) {
   }
 }
 function savePackage(xcodeDevTeam) {
-  const fp = "./package.json";
+  const fp = path.join(process.cwd(), "package.json");
   const project = require(fp);
   const out = { ...project, xcodeDevTeam };
   fs.writeFileSync(fp, JSON.stringify(out, null, 2));
