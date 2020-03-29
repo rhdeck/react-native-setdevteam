@@ -15,12 +15,6 @@
     "url": "https://github.com/rhdeck/react-native-setdevteam/issues"
   },
   "homepage": "https://github.com/rhdeck/react-native-setdevteam#readme",
-  "rnpm": {
-    "plugin": "plugin.js",
-    "commands": {
-      "postlink": "node ./node_modules/.bin/react-native-setdevteam"
-    }
-  },
   "bin": {
     "react-native-setdevteam": "postlink.js"
   },
