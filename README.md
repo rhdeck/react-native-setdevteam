@@ -50,12 +50,8 @@ react-native setdevteam --interactive
 
 **Note** the development team you selected for this project will be saved in your `package.json` as `xcodeDevTeam`.
 
-## 2. Keeping the team in synch
-
-After the `xcodeDevTeam` value has been set, you can make sure the team gets re-applied to your project consistently by running:
-
-```
-react-native link
-```
-
 Also note that running `react-native setdevteam` _without_ the `--interactive` flag will also use the `xcodeDevTeam` value, if available.
+
+## Updated For React >=0.60
+
+No changes are required for use - same `react-native setdevteam` as before
